@@ -29,7 +29,10 @@ public class User implements UserDetails {
 
     @NotBlank(message = "phoneNumber is required")
     private String phoneNumber;
+
+    @NotBlank(message = "password is required")
     private String password;
+
     private String role;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
