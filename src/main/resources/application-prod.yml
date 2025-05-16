@@ -5,13 +5,9 @@ spring:
     password: Monu@20345092
   jpa:
     properties:
-      hibernate-dialect: org.hibernate.dialect.MySQLDialect
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
-  servlet:
-    multipart:
-      max-file-size: 2GB
-      max-size-request: 2GB
-
   server:
     port: 8082

@@ -5,10 +5,11 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Data
+
 @Entity
 @Table(name="booking")
 public class Booking {
@@ -17,40 +18,106 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "check in date required")
+    @NotNull(message = "check in date is required")
     private LocalDate checkInDate;
 
-    @Future(message = "check out date must be in future")
+    @Future(message = "check out date must be in the future")
     private LocalDate checkOutDate;
 
-    @Min(value = 1,message = "Number of the adults must be less than 1")
+    @Min(value = 1, message = "Number of adults must not be less that 1")
     private int numOfAdults;
-    @Min(value=1,message = "Number of the children must be less than 0")
+
+    @Min(value = 0, message = "Number of children must not be less that 0")
     private int numOfChildren;
 
-    private int totalNumberGuest;
-
+    private int totalNumOfGuest;
 
     private String bookingConfirmationCode;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="room_id")
+    @JoinColumn(name = "room_id")
     private Room room;
 
-    public void calculateTotalNumberOfGuest(){
-        this.totalNumberGuest= this.numOfAdults+this.numOfChildren;
+    public Long getId() {
+        return id;
     }
 
-    public void setNumOfAdult(int numOfAdults) {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public @NotNull(message = "check in date is required") LocalDate getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(@NotNull(message = "check in date is required") LocalDate checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public @Future(message = "check out date must be in the future") LocalDate getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(@Future(message = "check out date must be in the future") LocalDate checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    @Min(value = 1, message = "Number of adults must not be less that 1")
+    public int getNumOfAdults() {
+        return numOfAdults;
+    }
+
+    @Min(value = 0, message = "Number of children must not be less that 0")
+    public int getNumOfChildren() {
+        return numOfChildren;
+    }
+
+    public int getTotalNumOfGuest() {
+        return totalNumOfGuest;
+    }
+
+    public void setTotalNumOfGuest(int totalNumOfGuest) {
+        this.totalNumOfGuest = totalNumOfGuest;
+    }
+
+    public String getBookingConfirmationCode() {
+        return bookingConfirmationCode;
+    }
+
+    public void setBookingConfirmationCode(String bookingConfirmationCode) {
+        this.bookingConfirmationCode = bookingConfirmationCode;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public void calculateTotalNumberOfGuest() {
+        this.totalNumOfGuest = this.numOfAdults + this.numOfChildren;
+    }
+
+    public void setNumOfAdults(int numOfAdults) {
         this.numOfAdults = numOfAdults;
         calculateTotalNumberOfGuest();
     }
 
-    public void setNumOfChildren( int numOfChildren) {
+    public void setNumOfChildren(int numOfChildren) {
         this.numOfChildren = numOfChildren;
         calculateTotalNumberOfGuest();
     }
@@ -63,10 +130,8 @@ public class Booking {
                 ", checkOutDate=" + checkOutDate +
                 ", numOfAdults=" + numOfAdults +
                 ", numOfChildren=" + numOfChildren +
-                ", totalNumberGuest=" + totalNumberGuest +
+                ", totalNumOfGuest=" + totalNumOfGuest +
                 ", bookingConfirmationCode='" + bookingConfirmationCode + '\'' +
-                ", user=" + user +
-                ", room=" + room +
                 '}';
     }
 }

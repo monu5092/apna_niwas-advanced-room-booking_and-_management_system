@@ -1,5 +1,6 @@
 package com.example.ApnaHotel.service;
 
+
 import com.example.ApnaHotel.exception.OurException;
 import com.example.ApnaHotel.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,6 @@ public class CustomerUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username).orElseThrow(()->new OurException("Username/Email not found"));
+        return (UserDetails) userRepository.findByEmail(username).orElseThrow(()->new OurException("Username/Email not found"));
     }
 }

@@ -1,16 +1,34 @@
 package com.example.ApnaHotel.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.validation.constraints.NotNull;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginRequest {
 
-    @NotNull(message = "Email is required")
+    @NotBlank(message = "Email is required")
     private String email;
-     @NotNull(message = "Password is required")
+     @NotBlank(message = "Password is required")
     private String password;
 
+    public @NotBlank(message = "Email is required") String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotBlank(message = "Email is required") String email) {
+        this.email = email;
+    }
+
+    public @NotBlank(message = "Password is required") String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NotBlank(message = "Password is required") String password) {
+        this.password = password;
+    }
 }

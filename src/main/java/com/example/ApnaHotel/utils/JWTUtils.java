@@ -1,5 +1,6 @@
 package com.example.ApnaHotel.utils;
 
+import com.example.ApnaHotel.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,11 +26,11 @@ public class JWTUtils {
        this.Key =new SecretKeySpec(keyBytes,"HmacSHA256");
     }
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(UserDetails userDetails) {
         return Jwts.builder()
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis()+EXPIRATION_TIME))
+                .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(Key)
                 .compact();
     }

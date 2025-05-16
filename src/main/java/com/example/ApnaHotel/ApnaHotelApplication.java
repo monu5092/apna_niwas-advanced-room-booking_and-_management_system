@@ -5,9 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ApnaHotelApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(ApnaHotelApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(ApnaHotelApplication.class, args);
+    }
 }
+
+
+
